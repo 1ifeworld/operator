@@ -1,0 +1,62 @@
+{
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "organizeImports": {
+    "enabled": false
+  },
+  "files": {
+    "ignore": [
+      "**/node_modules",
+      "cache",
+      "coverage",
+      "dist",
+      "tsconfig.json",
+      "pnpm-lock.yaml",
+      "README.md"
+    ]
+  },
+  "formatter": {
+    "enabled": true,
+    "formatWithErrors": false,
+    "indentStyle": "space",
+    "indentSize": 2,
+    "lineWidth": 80,
+    "ignore": [
+      "**/node_modules",
+      "cache",
+      "coverage",
+      "dist",
+      "tsconfig.json",
+      "pnpm-lock.yaml",
+      "README.md"
+    ]
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "suspicious": {
+        "noRedeclare": "off"
+      },
+      "complexity": {
+        "useOptionalChain": "off",
+        "noExtraBooleanCast": "off"
+      }
+    },
+    "ignore": [
+      "**/node_modules",
+      "cache",
+      "coverage",
+      "dist",
+      "tsconfig.json",
+      "pnpm-lock.yaml",
+      "README.md"
+    ]
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "single",
+      "trailingComma": "all",
+      "semicolons": "asNeeded"
+    }
+  }
+}
