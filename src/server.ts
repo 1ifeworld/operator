@@ -1,7 +1,7 @@
 import cors from 'cors'
 import express from 'express'
 // import { register } from "./api/generated";
-// import imdb from "./services/imdb";
+// import imdb from "./services";
 
 const PORT = process.env.PORT ?? 8080
 
