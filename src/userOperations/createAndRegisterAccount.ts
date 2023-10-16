@@ -15,9 +15,7 @@ import {
 import { entryPoint, riverNetSigner, idRegistry } from '@/constants'
 import { idRegistryAbi, riverAccountAbi } from '@/abi'
 import { buildInitCode } from '@/helpers'
-import { config } from 'dotenv'
-
-config()
+import { env } from '@/services'
 
 export async function createAndRegisterAccount({
   initialAdmin,
@@ -78,7 +76,7 @@ export async function createAndRegisterAccount({
         chainId: optimismGoerli.id,
       }),
     },
-    privateKey: process.env.PRIVATE_KEY as Hash,
+    privateKey: env.PRIVATE_KEY as Hash,
   })
 
   sponsoredUserOperation.signature = signature

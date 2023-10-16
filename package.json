@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "start": "tsx -r dotenv/config src/server.ts",
+    "start": "tsx src/server.ts",
     "format": "biome format . --write"
   },
   "keywords": [],
