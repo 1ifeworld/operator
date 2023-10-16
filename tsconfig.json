@@ -15,9 +15,10 @@
         "@/api": ["src/api/index.ts"],
         "@/config": ["src/config/index.ts"],
         "@/constants": ["src/constants/index.ts"],
-        "@/services": ["src/services/index.ts"],
-        "@/utils": ["src/utils/index.ts"],
         "@/helpers": ["src/helpers/index.ts"],
+        "@/services": ["src/services/index.ts"],
+        "@/userOperations": ["src/userOperations/index.ts"],
+        "@/utils": ["src/utils/index.ts"],
         "@/actions": ["src/provider/index.ts"],
       }
     },

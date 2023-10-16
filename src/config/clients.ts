@@ -9,6 +9,7 @@ import {
   createClient,
   createPublicClient,
   createWalletClient,
+  PublicClient,
 } from 'viem'
 import { riverNetSigner } from '@/constants'
 import { config } from 'dotenv'
@@ -40,7 +41,7 @@ export const publicClient = createPublicClient({
   transport: http(
     `https://opt-goerli.g.alchemy.com/v2/${process.env.ALCHEMY_KEY}`,
   ),
-})
+}) as PublicClient
 
 export const walletClient = createWalletClient({
   account: riverNetSigner,
