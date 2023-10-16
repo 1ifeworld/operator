@@ -3,9 +3,9 @@ import { createAndRegisterAccount } from '@/userOperations'
 import { Router } from 'express'
 import { isAddress } from 'viem'
 
-const router = Router()
+export const router = Router()
 
-router.post('/create-account', async (req, res) => {
+router.post('/', async (req, res) => {
   if (req.body == null) {
     res.status(400).json({ error: 'Request body is missing' })
     return
