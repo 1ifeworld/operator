@@ -6,7 +6,11 @@ const PORT = process.env.PORT ?? 8080
 
 const app = express()
 
-app.use(cors())
+const corsOptions = {
+    origin: 'https://auth-demo-bice.vercel.app/',
+  };
+
+app.use(cors(corsOptions))
 
 app.use('/create-account', createAccountRouter)
 
