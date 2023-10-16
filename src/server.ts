@@ -1,5 +1,6 @@
 import cors from 'cors'
 import express from 'express'
+import { router as createAccountRouter } from '@/services'
 
 const PORT = process.env.PORT ?? 8080
 
@@ -7,9 +8,7 @@ const app = express()
 
 app.use(cors())
 
-// register(app, {
-//   imdb,
-// });
+app.use('/create-account', createAccountRouter)
 
 app.listen(PORT)
 
