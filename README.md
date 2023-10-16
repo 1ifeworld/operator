@@ -22,10 +22,10 @@ Refer to the `env.example` to configure your environment variables
 - Obtain a `PIMLICO_KEY` via the [Pimlico dashboard](https://dashboard.pimlico.io/)
 - Provide the `PRIVATE_KEY` for the EOA coupled with River Net. For security reasons, this will not be shared with anyone outside of Lifeworld.
 
-Lastly, run the development server:
+Lastly, run the server:
 
 ```bash
-$ pnpm dev
+$ pnpm start
 ```
 
 
