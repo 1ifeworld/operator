@@ -1,10 +1,13 @@
-lockfileVersion: '6.0'
+lockfileVersion: '6.1'
 
 settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@unkey/api':
+    specifier: ^0.10.3
+    version: 0.10.3
   cors:
     specifier: ^2.8.5
     version: 2.8.5
@@ -16,10 +19,10 @@ dependencies:
     version: 4.18.2
   permissionless:
     specifier: ^0.0.6
-    version: 0.0.6(viem@1.16.5)
+    version: 0.0.6(viem@1.16.6)
   viem:
-    specifier: ^1.16.5
-    version: 1.16.5(typescript@5.2.2)
+    specifier: ^1.16.6
+    version: 1.16.6(typescript@5.2.2)
 
 devDependencies:
   '@biomejs/biome':
@@ -424,6 +427,10 @@ packages:
       '@types/node': 20.8.6
     dev: true
 
+  /@unkey/api@0.10.3:
+    resolution: {integrity: sha512-q0wK3D2gG8zfFSmM7k9bp1hV7X9wRFmuafiPnM/BXkURZllPvz/fNzwLkgzUiQOcSn97LPW9Tes2OW1MhbNwpQ==}
+    dev: false
+
   /abitype@0.9.8(typescript@5.2.2):
     resolution: {integrity: sha512-puLifILdm+8sjyss4S+fsUN09obiT1g2YW6CtcQF+QDzxR0euzgEB29MZujC6zMk2a6SVmtttq1fc6+YFA7WYQ==}
     peerDependencies:
@@ -800,12 +807,12 @@ packages:
     resolution: {integrity: sha512-5DFkuoqlv1uYQKxy8omFBeJPQcdoE07Kv2sferDCrAq1ohOU+MSDswDIbnx3YAM60qIOnYa53wBhXW0EbMonrQ==}
     dev: false
 
-  /permissionless@0.0.6(viem@1.16.5):
+  /permissionless@0.0.6(viem@1.16.6):
     resolution: {integrity: sha512-Lhv0Ni0Oz0aa9SaCg26FgPPhROnHnPCGKQ3S6I3Bw0AcdnvvSbMLHZCDoU1fiB/q1gFwHncdztrAdfaUnXHovQ==}
     peerDependencies:
       viem: ^1.14.0
     dependencies:
-      viem: 1.16.5(typescript@5.2.2)
+      viem: 1.16.6(typescript@5.2.2)
     dev: false
 
   /proxy-addr@2.0.7:
@@ -964,8 +971,8 @@ packages:
     engines: {node: '>= 0.8'}
     dev: false
 
-  /viem@1.16.5(typescript@5.2.2):
-    resolution: {integrity: sha512-D8aE6cp/5w6PDtOOkJjkN+FtLyfsNWkfE78N4yTgCt4BG7KsBsePp4O68r1IaTVTVa41anebiZAy9kNEIwAXiw==}
+  /viem@1.16.6(typescript@5.2.2):
+    resolution: {integrity: sha512-jcWcFQ+xzIfDwexwPJRvCuCRJKEkK9iHTStG7mpU5MmuSBpACs4nATBDyXNFtUiyYTFzLlVEwWkt68K0nCSImg==}
     peerDependencies:
       typescript: '>=5.0.4'
     peerDependenciesMeta:
