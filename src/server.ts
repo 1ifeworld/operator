@@ -10,37 +10,37 @@ const app = express()
 const unkey = new Unkey({ rootKey: `${process.env.UNKEY_ROOT}` });
 
 
-const corsOptions = {
-    origin: 'https://auth-demo-bice.vercel.app/',
-  };
+// const corsOptions = {
+//     // origin: 'https://auth-demo-bice.vercel.app/',
+//     origin: 'http://localhost:3000/',
+//   };
 
-app.use(cors(corsOptions))
+app.use(cors())
+app.use(express.urlencoded({ extended: true }));
 
-
-app.use('/create-account', async (req, res) => {
+app.use(async (req, res, next) => {
+  console.log("REQROUTE", req.body)
   const apiKey = req.headers.authorization?.replace("Bearer ", "");
   if (!apiKey) {
     return res.status(401).send("Unauthorized");
   }
   try {
     const { result, error } = await verifyKey(apiKey);
-
-    if (error) {
+    if (error || !result.valid) {
       console.error(error);
-      return res.status(500).json("Internal Server Error");
-    }
-
-    if (!result.valid) {
       return res.status(401).send("Unauthorized");
     }
-
-    return res.json(result);
+    console.log("RESULT", result);
+    next();
   } catch (error) {
     console.error(error);
     return res.status(500).json("Internal Server Error");
   }
 });
 
-app.listen(PORT)
 
-console.log(`Listening on port ${PORT}...`)
+app.use('/create-account', createAccountRouter);
+
+app.listen(PORT);
+console.log(`Listening on port ${PORT}...`);
+
