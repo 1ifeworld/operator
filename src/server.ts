@@ -19,7 +19,6 @@ app.use(cors())
 app.use(express.urlencoded({ extended: true }));
 
 app.use(async (req, res, next) => {
-  console.log("REQROUTE", req.body)
   const apiKey = req.headers.authorization?.replace("Bearer ", "");
   if (!apiKey) {
     return res.status(401).send("Unauthorized");
@@ -30,7 +29,7 @@ app.use(async (req, res, next) => {
       console.error(error);
       return res.status(401).send("Unauthorized");
     }
-    console.log("RESULT", result);
+
     next();
   } catch (error) {
     console.error(error);
