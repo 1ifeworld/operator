@@ -12,6 +12,7 @@ import {
   PublicClient,
 } from 'viem'
 import { riverNetSigner } from '@/constants'
+import { Unkey } from '@unkey/api'
 import { config } from 'dotenv'
 
 config()
@@ -48,3 +49,4 @@ export const walletClient = createWalletClient({
   chain: optimismGoerli,
   transport: http(),
 })
+
