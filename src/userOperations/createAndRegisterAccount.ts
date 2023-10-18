@@ -24,7 +24,6 @@ export async function createAndRegisterAccount({
 }: {
   initialAdmin: Hex
 }) {
-
   const initCode = buildInitCode({ initialAdmin })
 
   const senderAddress = await getSenderAddress(publicClient, {

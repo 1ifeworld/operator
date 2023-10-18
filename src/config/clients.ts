@@ -49,4 +49,3 @@ export const walletClient = createWalletClient({
   chain: optimismGoerli,
   transport: http(),
 })
-

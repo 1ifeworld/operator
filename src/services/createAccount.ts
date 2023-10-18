@@ -12,17 +12,19 @@ router.post('/', async (req, res) => {
   }
   const { initialAdmin } = req.body
   if (!isAddress(initialAdmin)) {
-  res.status(400).json({ error: 'Invalid address' })
+    res.status(400).json({ error: 'Invalid address' })
     return
   }
 
-  const bytecode = await accountExists({initialAdmin});
+  const bytecode = await accountExists({ initialAdmin })
   if (bytecode && bytecode !== '0x') {
-    res.status(400).json({ error: 'Sender already has an account' });
-    return;
+    res.status(400).json({ error: 'Sender already has an account' })
+    return
   }
 
-  const { senderAddress, txHash } = await createAndRegisterAccount({initialAdmin})
+  const { senderAddress, txHash } = await createAndRegisterAccount({
+    initialAdmin,
+  })
 
   res.json({ senderAddress, txHash })
 })
