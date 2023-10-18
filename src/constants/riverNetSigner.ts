@@ -1,9 +1,6 @@
 import { privateKeyToAccount } from 'viem/accounts'
 import { type Hash } from 'viem'
-import { config } from 'dotenv'
+import { env } from '@/services'
 
-config()
 
-export const riverNetSigner = privateKeyToAccount(
-  process.env.PRIVATE_KEY as Hash,
-)
+export const riverNetSigner = privateKeyToAccount(env.PRIVATE_KEY as Hash)
