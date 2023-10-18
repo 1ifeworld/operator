@@ -2,44 +2,75 @@ import cors from 'cors'
 import express from 'express'
 import { Unkey } from '@unkey/api'
 import { verifyKey } from '@unkey/api'
+import session  from 'express-session'
+import connectPgSimple from 'connect-pg-simple'
+import pgPromise from 'pg-promise'
 import { router as createAccountRouter } from '@/services'
+
+
+
+
+declare module 'express-session' {
+  interface SessionData {
+    verified: boolean
+  }
+}
 
 const PORT = process.env.PORT ?? 8080
 
 const app = express()
-const unkey = new Unkey({ rootKey: `${process.env.UNKEY_ROOT}` });
+const unkey = new Unkey({ rootKey: `${process.env.UNKEY_ROOT}` })
 
 
-// const corsOptions = {
-//     // origin: 'https://auth-demo-bice.vercel.app/',
-//     origin: 'http://localhost:3000/',
-//   };
+const corsOptions = {
+    // origin: 'https://auth-demo-bice.vercel.app/',
+    origin: 'http://localhost:8080/',
+  }
 
 app.use(cors())
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }))
+
+const pgp = pgPromise()
+const db = pgp(`${process.env.DATABASE_URL}`)
+const pgStore = connectPgSimple(session)
+
+
+app.use(session({
+  store: new pgStore({
+    pgPromise: db,  
+    tableName: 'riversessions'
+
+  }),
+  secret: `${process.env.SESSION_SECRET}`,
+  resave: false,
+  saveUninitialized: true,
+}))
 
 app.use(async (req, res, next) => {
-  const apiKey = req.headers.authorization?.replace("Bearer ", "");
+  if (req.session.verified) {
+    return next()
+  }
+  const apiKey = req.headers.authorization?.replace("Bearer ", "")
   if (!apiKey) {
-    return res.status(401).send("Unauthorized");
+    return res.status(401).send("Unauthorized")
   }
   try {
-    const { result, error } = await verifyKey(apiKey);
+    const { result, error } = await verifyKey(apiKey)
     if (error || !result.valid) {
-      console.error(error);
-      return res.status(401).send("Unauthorized");
+      console.error(error)
+      return res.status(401).send("Unauthorized")
     }
-
-    next();
+    req.session.verified = true  
+    next()
   } catch (error) {
-    console.error(error);
-    return res.status(500).json("Internal Server Error");
+    console.error(error)
+    return res.status(500).json("Internal Server Error")
   }
-});
+})
 
 
-app.use('/create-account', createAccountRouter);
+app.use('/create-account', createAccountRouter)
 
-app.listen(PORT);
-console.log(`Listening on port ${PORT}...`);
+app.listen(PORT)
+console.log(`Listening on port ${PORT}...`)
 
