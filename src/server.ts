@@ -22,12 +22,6 @@ const app = express()
 const unkey = new Unkey({ rootKey: `${process.env.UNKEY_ROOT}` })
 
 
-const corsOptions = {
-    // origin: 'https://auth-demo-bice.vercel.app/',
-    origin: 'http://localhost:8080/',
-  }
-
-app.use(cors())
 app.use(express.urlencoded({ extended: true }))
 
 const pgp = pgPromise()
@@ -38,7 +32,7 @@ const pgStore = connectPgSimple(session)
 app.use(session({
   store: new pgStore({
     pgPromise: db,  
-    tableName: 'riversessions'
+    tableName: 'river-sessions'
 
   }),
   secret: `${process.env.SESSION_SECRET}`,
