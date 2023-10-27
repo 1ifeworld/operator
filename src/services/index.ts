@@ -1,1 +1,1 @@
-export * from './mintReceipt'
+export * from './createAccount'
