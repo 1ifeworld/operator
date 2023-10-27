@@ -1,6 +1,6 @@
 import { type Hex } from 'viem'
 
-export const entryPoint = '0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789' as Hex
-export const riverAccountFactory =
-  '0xdaD322f3186de786Eb5A1B1B73b55A4e1E50C08D' as Hex
-export const idRegistry = '0x3c4B5CD8aED02284b5eD1e8C5950381Bd997A6A6' as Hex
+export const erc6551registry =
+  '0x000000006551c19487814612e58FE06813775758' as Hex
+export const erc6551Impl = '0x2b389dA8357b3320D870c12B3a031f4A57303170' as Hex
+export const receipts = '0xb5BDb1a9E1399feE0F2C114EA896Cd9016C01CC6' as Hex

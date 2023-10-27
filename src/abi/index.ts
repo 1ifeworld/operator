@@ -1,3 +1,2 @@
-export * from './idRegistryAbi'
-export * from './riverAccountAbi'
-export * from './riverAccountFactoryAbi'
+export * from './receiptsAbi'
+export * from './erc6551RegistryAbi'
