@@ -1,8 +1,3 @@
-import {
-  pimlicoBundlerActions,
-  pimlicoPaymasterActions,
-} from 'permissionless/actions/pimlico'
-import { bundlerActions } from 'permissionless'
 import { optimismGoerli } from 'viem/chains'
 import {
   http,
@@ -11,31 +6,12 @@ import {
   createWalletClient,
   PublicClient,
 } from 'viem'
-import { riverNetSigner } from '@/constants'
-import { Unkey } from '@unkey/api'
+import { receiptMinter } from '@/constants'
 import { config } from 'dotenv'
 
 config()
 
 const chain = 'optimism-goerli'
-
-export const pimlicoBundlerClient = createClient({
-  chain: optimismGoerli,
-  // ⚠️ using v1 of the API ⚠️
-  transport: http(
-    `https://api.pimlico.io/v1/${chain}/rpc?apikey=${process.env.PIMLICO_KEY}`,
-  ),
-})
-  .extend(bundlerActions)
-  .extend(pimlicoBundlerActions)
-
-export const pimlicoPaymasterClient = createClient({
-  chain: optimismGoerli,
-  // ⚠️ using v2 of the API ⚠️
-  transport: http(
-    `https://api.pimlico.io/v2/${chain}/rpc?apikey=${process.env.PIMLICO_KEY}`,
-  ),
-}).extend(pimlicoPaymasterActions)
 
 export const publicClient = createPublicClient({
   chain: optimismGoerli,
@@ -45,8 +21,7 @@ export const publicClient = createPublicClient({
 }) as PublicClient
 
 export const walletClient = createWalletClient({
-  account: riverNetSigner,
+  account: receiptMinter,
   chain: optimismGoerli,
   transport: http(),
 })
-
