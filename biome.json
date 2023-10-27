@@ -18,7 +18,7 @@
     "enabled": true,
     "formatWithErrors": false,
     "indentStyle": "space",
-    "indentWidth": 2,
+    "indentSize": 2,
     "lineWidth": 80,
     "ignore": [
       "**/node_modules",
