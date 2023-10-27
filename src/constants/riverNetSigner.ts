@@ -4,6 +4,6 @@ import { config } from 'dotenv'
 
 config()
 
-export const riverNetSigner = privateKeyToAccount(
+export const receiptMinter = privateKeyToAccount(
   process.env.PRIVATE_KEY as Hash,
 )
