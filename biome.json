@@ -39,7 +39,8 @@
       },
       "complexity": {
         "useOptionalChain": "off",
-        "noExtraBooleanCast": "off"
+        "noExtraBooleanCast": "off",
+        "noForEach": "off"
       }
     },
     "ignore": [

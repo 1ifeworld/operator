@@ -1,6 +1,9 @@
-import { accountExists } from '@/helpers'
+import { create6551Account } from '@/helpers'
 import { Router } from 'express'
-import { isAddress } from 'viem'
+import { optimismGoerli } from 'viem/chains'
+import { publicClient, walletClient } from '@/config'
+import { erc6551RegistryAbi, receiptsAbi } from '@/abi'
+import { erc6551registry, salt, erc6551Impl, receipts } from '@/constants'
 
 export const router = Router()
 
@@ -10,19 +13,43 @@ router.post('/', async (req, res) => {
     return
   }
 
-  const { idToMintFor } = req.body
+  const { idRegistryToken } = req.body
 
-  //   if (!isAddress(initialAdmin)) {
-  //   res.status(400).json({ error: 'Invalid address' })
-  //     return
-  //   }
+  const data = await publicClient.readContract({
+    address: erc6551registry,
+    abi: erc6551RegistryAbi,
+    functionName: 'account',
+    args: [
+      erc6551Impl,
+      salt,
+      BigInt(optimismGoerli.id),
+      receipts,
+      BigInt(idRegistryToken),
+    ],
+  })
 
-  // account exists?
+  // Exclusively for renaming the returned data
+  const tokenboundAcct = data
 
-  // @ts-expect-error
-  const bytecode = await accountExists()
-  if (bytecode && bytecode !== '0x') {
-    res.status(400).json({ error: 'Sender already has an account' })
-    return
+  const bytecode = await publicClient.getBytecode({
+    address: tokenboundAcct,
+  })
+
+  if (!bytecode) {
+    await create6551Account(idRegistryToken)
   }
+
+  const { request } = await publicClient.simulateContract({
+    address: receipts,
+    abi: receiptsAbi,
+    functionName: 'mint',
+    args: [tokenboundAcct, BigInt(1)],
+  })
+
+  const hash = await walletClient.writeContract(request)
+
+  const transaction = await publicClient.waitForTransactionReceipt({ hash })
+
+  // Send the transaction back to the client
+  res.json({ transaction })
 })
