@@ -1,3 +1,3 @@
 export * from './addresses'
-export * from './receiptMinter'
+export * from './riverNetSigner'
 export * from './salt'
